@@ -1,0 +1,23 @@
+DirectoryIndex index.html
+RewriteEngine on
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://crepemaker.xyz/$1 [R=301,L]
+
+RewriteBase /
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+
+<Files ~ "^\.(.*)$|README">
+  deny from all
+</Files>
+
+<IfModule mod_headers.c>
+  <filesMatch "\.(css)$">
+    Header set Cache-Control "must-revalidate"
+  </filesMatch>
+  <filesMatch "\.(js)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+  </filesMatch>
+</IfModule>
