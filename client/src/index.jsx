@@ -5,7 +5,7 @@ import { Container } from 'react-bootstrap'
 import { HomeView } from './views'
 import { TopBar } from './components'
 
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import '../node_modules/bootstrap-honoka/dist/css/bootstrap.min.css'
 
 render(
   <div>
