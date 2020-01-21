@@ -1,3 +1,32 @@
+.self {
+}
+
+.form {
+  padding-bottom: 40px;
+  background-color: var(--gray-dark);
+}
+
+.form_text {
+  font-weight: bold;
+  font-size: x-large;
+  color: white;
+}
+
 .search_button {
-  margin: 20px 10px;
+  margin: 20px 0;
+}
+
+.recommendations_text {
+  font-weight: bold;
+  font-size: x-large;
+  color: black;
+}
+
+.recommendations {
+  h3 {
+    color: var(--gray-dark);
+    border-bottom: solid 3px var(--secondary);
+  }
+  margin-top: 40px;
+  background-color: white;
 }

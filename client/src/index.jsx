@@ -12,7 +12,7 @@ render(
     <BrowserRouter>
       <div>
         <TopBar />
-        <Container>
+        <Container fluid style={{ 'padding': '0' }}>
           <Route exact={true} path="/" component={HomeView} />
         </Container>
       </div>
