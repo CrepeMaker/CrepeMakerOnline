@@ -1,0 +1,28 @@
+.self {
+  h2 {
+    color: var(--gray-dark);
+    border-bottom: solid 3px var(--secondary);
+  }
+  h3 {
+    color: var(--gray-dark);
+    border-bottom: solid 2px var(--secondary);
+  }
+}
+
+.texticon {
+  width: 1em;
+  margin-right: 5px;
+  color: var(--gray-dark);
+}
+
+.content {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  margin-bottom: 20px;
+}
+
+.bar_text:after {
+  content: "";
+  clear: both;
+  display: block;
+}

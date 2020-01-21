@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from 'react-dom'
 import { BrowserRouter, Route } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
-import { HomeView } from './views'
+import { HomeView, RestaurantView } from './views'
 import { TopBar } from './components'
 
 import '../node_modules/bootstrap-honoka/dist/css/bootstrap.min.css'
@@ -14,6 +14,7 @@ render(
         <TopBar />
         <Container fluid style={{ 'padding': '0' }}>
           <Route exact={true} path="/" component={HomeView} />
+          <Route exact={true} path="/restaurant/:id" component={RestaurantView} />
         </Container>
       </div>
     </BrowserRouter>
