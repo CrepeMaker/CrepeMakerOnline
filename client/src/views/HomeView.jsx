@@ -40,25 +40,17 @@ class HomeView extends React.Component {
     return (
       <Container>
         <Row>
-          <Col md={{ span: 6, offset: 3 }} sm={{ span: 8, offset: 2 }}>
+          <Col lg={{ span: 6, offset: 3 }} md={{ span: 8, offset: 2 }} sm={12}>
             <PlaceSelector
               places={places}
               selected={selected_place}
               onUpdate={this.onUpdatePlace.bind(this)}
             />
-          </Col>
-        </Row>
-        <Row>
-          <Col md={{ span: 6, offset: 3 }} sm={{ span: 8, offset: 2 }}>
             <KeywordButtons
               keywords={keywords}
               selected={selected_keywords}
               onUpdate={this.onUpdateKeywords.bind(this)}
             />
-          </Col>
-        </Row>
-        <Row>
-          <Col md={{ span: 6, offset: 3 }} sm={{ span: 8, offset: 2 }}>
             <Button
               block
               className={styles.search_button}
