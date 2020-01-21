@@ -21,6 +21,10 @@ class HomeView extends React.Component {
         name: 'レストラン大岡山', tel: '03-987-6543', place: '東京都目黒区大岡山3-1', genre: 'イタリアン',
         scores: [{ 'keyword': '味', 'score': 23.3 }, { 'keyword': '雰囲気', 'score': 72.5 }, { 'keyword': '立地', 'score': 61.0 }]
       },
+      {
+        name: 'カフェクレープ', tel: '03-987-6543', place: '東京都目黒区大岡山1-5', genre: 'カフェ',
+        scores: [{ 'keyword': '味', 'score': 40.3 }, { 'keyword': '雰囲気', 'score': 80.5 }, { 'keyword': '料理(質)', 'score': 51.0 }]
+      },
     ]
 
     this.state = {
@@ -55,13 +59,17 @@ class HomeView extends React.Component {
       <div className={styles.self}>
         <div className={styles.form}>
           <Container>
-            <Row>
-              <Col className='text-center'>
-                <span className={styles.form_text}>
-                  自分に合ったレストランを見つけよう
-            </span>
-              </Col>
-            </Row>
+            <h3>
+              <span>
+                自分に合った
+              </span>
+              <span>
+                レストランを
+              </span>
+              <span>
+                見つけよう
+              </span>
+            </h3>
             <Row>
               <Col lg={{ span: 8, offset: 2 }} md={{ span: 10, offset: 1 }} sm={12}>
                 <Card>

@@ -13,14 +13,6 @@ class TopBar extends React.Component {
           CrepeMakerOnline
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse>
-          <Nav className="mr-auto">
-            <TopBarLink
-              to='/'
-              title="Home"
-            />
-          </Nav>
-        </Navbar.Collapse>
       </Navbar>
     )
   }

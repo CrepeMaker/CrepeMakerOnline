@@ -2,14 +2,18 @@
 }
 
 .form {
-  padding-bottom: 40px;
-  background-color: var(--gray-dark);
-}
+  h3 {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
 
-.form_text {
-  font-weight: bold;
-  font-size: x-large;
-  color: white;
+    span {
+      display: inline-block;
+    }
+  }
+  padding-bottom: 40px;
+  background: linear-gradient(to bottom, var(--gray-dark), #f5f5f5);
+//  background-color: var(--gray-dark);
 }
 
 .search_button {
@@ -27,6 +31,6 @@
     color: var(--gray-dark);
     border-bottom: solid 3px var(--secondary);
   }
-  margin-top: 40px;
-  background-color: white;
+  padding-top: 40px;
+  background-color: #f5f5f5;
 }

@@ -33,7 +33,7 @@ class RestaurantCard extends React.Component {
               <Col lg={5} md={12}>
                 {
                   scores && scores.map(item => (
-                    <Container>
+                    <Container key={item.keyword}>
                       <Row>
                         <Col xs={3}>
                           {item.keyword}
