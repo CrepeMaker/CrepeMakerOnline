@@ -16,21 +16,21 @@ class RestaurantCard extends React.Component {
           </Card.Title>
           <Container>
             <Row>
-              <Col lg={4} md={12}>
+              <Col lg={4} md={12} className={styles.content}>
                 <div>
-                  <FontAwesomeIcon className={styles.texticon} icon={faMapMarkerAlt} />
+                  <FontAwesomeIcon className={styles.texticon} icon={faMapMarkerAlt} fixedWidth />
                   {place}
                 </div>
                 <div>
-                  <FontAwesomeIcon className={styles.texticon} icon={faPhone} />
+                  <FontAwesomeIcon className={styles.texticon} icon={faPhone} fixedWidth />
                   {tel}
                 </div>
                 <div>
-                  <FontAwesomeIcon className={styles.texticon} icon={faUtensils} />
+                  <FontAwesomeIcon className={styles.texticon} icon={faUtensils} fixedWidth />
                   {genre}
                 </div>
               </Col>
-              <Col lg={5} md={12}>
+              <Col lg={5} md={12} className={styles.content}>
                 {
                   scores && scores.map(item => (
                     <Container key={item.keyword}>
