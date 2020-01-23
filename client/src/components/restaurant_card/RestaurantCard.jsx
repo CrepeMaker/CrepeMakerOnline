@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Card, Container, Row, Col, ProgressBar, Image } from 'react-bootstrap'
+import c from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkerAlt, faPhone, faUtensils } from '@fortawesome/free-solid-svg-icons'
 import styles from './RestaurantCard.scss'
@@ -10,7 +11,7 @@ class RestaurantCard extends React.Component {
     const { id, name, place, tel, genre, scores, border, image } = this.props
 
     return (
-      <Card border={border} className={styles.self}>
+      <Card border={border} className={c(styles.self, 'animated fadeIn')}>
         <Card.Body>
           <Card.Title>
             <Link to={`/restaurant/${id}`}>

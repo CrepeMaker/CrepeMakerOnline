@@ -6,6 +6,7 @@ import { HomeView, RestaurantView } from './views'
 import { TopBar } from './components'
 
 import '../node_modules/bootstrap-honoka/dist/css/bootstrap.min.css'
+import '../node_modules/animate.css/animate.min.css'
 
 render(
   <div>

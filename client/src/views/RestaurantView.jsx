@@ -3,6 +3,7 @@ import { Container, Row, Col, ProgressBar } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkerAlt, faPhone, faUtensils } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
+import { RestaurantMap } from '../components'
 import styles from './RestaurantView.scss'
 
 class RestaurantView extends React.Component {
@@ -30,7 +31,9 @@ class RestaurantView extends React.Component {
   }
 
   render() {
-    const { name, place, tel, genre, scores } = this.state.restaurant
+    const { name, place, tel, genre, scores, coordinates } = this.state.restaurant
+
+    console.log(this.state.restaurant)
 
     return (
       <Container className={styles.self}>
@@ -55,7 +58,7 @@ class RestaurantView extends React.Component {
 
             <h3>地図</h3>
             <div className={styles.content}>
-
+              <RestaurantMap center={coordinates} marker={name} />
             </div>
           </Col>
           <Col xs={{ span: 12, order: 2 }} lg={{ span: 8, order: 1 }}>
@@ -81,7 +84,15 @@ class RestaurantView extends React.Component {
             </div>
             <h3>リンク</h3>
             <div className={styles.content}>
-
+              <p className={styles.retty}>
+                Retty
+              </p>
+              <p className={styles.gurunavi}>
+                ぐるなび
+              </p>
+              <p className={styles.tabelog}>
+                食べログ
+              </p>
             </div>
           </Col>
         </Row>
