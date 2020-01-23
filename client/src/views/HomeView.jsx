@@ -2,6 +2,7 @@ import React from 'react'
 import { Container, Row, Col, Button, Card } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUtensils } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios'
 import { KeywordButtons, GenreSelector, PlaceSelector, RestaurantCard } from '../components'
 import styles from './HomeView.scss'
 
@@ -13,20 +14,7 @@ class HomeView extends React.Component {
     const places = ['目黒区']
     const genres = ['全て', '和食', 'イタリアン', 'カフェ']
 
-    const restaurants = [
-      {
-        name: '大岡山食堂', tel: '03-1234-5678', place: '東京都目黒区大岡山1-23-4', genre: '和食',
-        scores: [{ 'keyword': '味', 'score': 42.3 }, { 'keyword': '雰囲気', 'score': 23.5 }]
-      },
-      {
-        name: 'レストラン大岡山', tel: '03-987-6543', place: '東京都目黒区大岡山3-1', genre: 'イタリアン',
-        scores: [{ 'keyword': '味', 'score': 23.3 }, { 'keyword': '雰囲気', 'score': 72.5 }, { 'keyword': '立地', 'score': 61.0 }]
-      },
-      {
-        name: 'カフェクレープ', tel: '03-987-6543', place: '東京都目黒区大岡山1-5', genre: 'カフェ',
-        scores: [{ 'keyword': '味', 'score': 40.3 }, { 'keyword': '雰囲気', 'score': 80.5 }, { 'keyword': '料理(質)', 'score': 51.0 }]
-      },
-    ]
+    this.api = axios.create('/')
 
     this.state = {
       keywords,
@@ -35,8 +23,15 @@ class HomeView extends React.Component {
       selected_genre: genres.length ? genres[0] : '',
       places,
       selected_place: places.length ? places[0] : '',
-      restaurants,
+      restaurants: [],
     }
+  }
+
+  async componentDidMount() {
+    const res = await this.api.get('data/sample_restaurants.json', {
+      responseType: 'json',
+    })
+    this.setState({ restaurants: res.data })
   }
 
   onUpdateKeywords(selected_keywords) {

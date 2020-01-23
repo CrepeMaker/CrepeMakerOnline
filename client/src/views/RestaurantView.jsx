@@ -2,24 +2,35 @@ import React from 'react'
 import { Container, Row, Col, ProgressBar } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkerAlt, faPhone, faUtensils } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios'
 import styles from './RestaurantView.scss'
 
 class RestaurantView extends React.Component {
   constructor(props) {
     super(props)
 
-    const restaurant = {
-      name: '大岡山食堂', tel: '03-1234-5678', place: '東京都目黒区大岡山1-23-4', genre: '和食',
-      scores: [{ 'keyword': '味', 'score': 42.3 }, { 'keyword': '雰囲気', 'score': 23.5 }]
-    }
+    this.api = axios.create('/')
 
     this.state = {
-      ...restaurant,
+      restaurant: {}
+    }
+  }
+
+  async componentDidMount() {
+    const { id } = this.props.match.params
+
+    const res = await this.api.get('/data/sample_restaurants.json')
+    const restaurants = res.data
+
+
+    const targets = restaurants.filter(item => item.id === id)
+    if (targets.length) {
+      this.setState({ restaurant: targets[0] })
     }
   }
 
   render() {
-    const { name, place, tel, genre, scores } = this.state
+    const { name, place, tel, genre, scores } = this.state.restaurant
 
     return (
       <Container className={styles.self}>
@@ -52,7 +63,7 @@ class RestaurantView extends React.Component {
             <div className={styles.content}>
               {
                 scores && scores.map(item => (
-                  <p key={item.keyword}>
+                  <div key={item.keyword}>
                     <div className={styles.bar_text}>
                       <span className='float-left'>
                         {item.keyword}
@@ -64,7 +75,7 @@ class RestaurantView extends React.Component {
                     <div>
                       <ProgressBar now={item.score} />
                     </div>
-                  </p>
+                  </div>
                 ))
               }
             </div>

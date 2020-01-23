@@ -1,21 +1,31 @@
 import React from 'react'
-import { Card, Container, Row, Col, ProgressBar } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import { Card, Container, Row, Col, ProgressBar, Image } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkerAlt, faPhone, faUtensils } from '@fortawesome/free-solid-svg-icons'
 import styles from './RestaurantCard.scss'
 
 class RestaurantCard extends React.Component {
   render() {
-    const { name, place, tel, genre, scores, border } = this.props
+    const { id, name, place, tel, genre, scores, border, image } = this.props
 
     return (
       <Card border={border} className={styles.self}>
         <Card.Body>
           <Card.Title>
-            {name}
+            <Link to={`/restaurant/${id}`}>
+              {name}
+            </Link>
           </Card.Title>
           <Container>
             <Row>
+              <Col lg={3} md={12}>
+                <Image
+                  className={styles.image}
+                  src={image}
+                  fluid
+                />
+              </Col>
               <Col lg={4} md={12} className={styles.content}>
                 <div>
                   <FontAwesomeIcon className={styles.texticon} icon={faMapMarkerAlt} fixedWidth />

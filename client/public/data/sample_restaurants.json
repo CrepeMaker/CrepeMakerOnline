@@ -1,0 +1,73 @@
+[
+  {
+    "id": "sample-1",
+    "name": "大岡山食堂",
+    "tel": "03-1234-5678",
+    "place": "東京都目黒区大岡山1-23-4",
+    "coordinates": {
+      "latitude": 35.6099,
+      "longitude": 139.6822
+    },
+    "genre": "和食",
+    "scores": [
+      {
+        "keyword": "味",
+        "score": 42.3
+      },
+      {
+        "keyword": "雰囲気",
+        "score": 23.5
+      }
+    ]
+  },
+  {
+    "id": "sample-2",
+    "name": "レストラン大岡山",
+    "tel": "03-987-6543",
+    "place": "東京都目黒区大岡山3-1",
+    "coordinates": {
+      "latitude": 35.6099,
+      "longitude": 139.6822
+    },
+    "genre": "イタリアン",
+    "scores": [
+      {
+        "keyword": "味",
+        "score": 23.3
+      },
+      {
+        "keyword": "雰囲気",
+        "score": 72.5
+      },
+      {
+        "keyword": "立地",
+        "score": 61.0
+      }
+    ]
+  },
+  {
+    "id": "sample-3",
+    "name": "カフェクレープ",
+    "tel": "03-987-6543",
+    "place": "東京都目黒区大岡山1-5",
+    "coordinates": {
+      "latitude": 35.6099,
+      "longitude": 139.6822
+    },
+    "genre": "カフェ",
+    "scores": [
+      {
+        "keyword": "味",
+        "score": 40.3
+      },
+      {
+        "keyword": "雰囲気",
+        "score": 80.5
+      },
+      {
+        "keyword": "料理(質)",
+        "score": 51.0
+      }
+    ]
+  }
+]
