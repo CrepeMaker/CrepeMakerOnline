@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Row, Col, Button, Card } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUtensils } from '@fortawesome/free-solid-svg-icons'
-import axios from 'axios'
+import { create } from '../utils/axios'
 import { KeywordButtons, GenreSelector, PlaceSelector, RestaurantCard } from '../components'
 import styles from './HomeView.scss'
 
@@ -14,7 +14,7 @@ class HomeView extends React.Component {
     const places = ['目黒区']
     const genres = ['全て', '和食', 'イタリアン', 'カフェ']
 
-    this.api = axios.create('/')
+    this.api = create()
 
     this.state = {
       keywords,
@@ -28,8 +28,8 @@ class HomeView extends React.Component {
   }
 
   async componentDidMount() {
-    const res = await this.api.get('data/sample_restaurants.json', {
-      responseType: 'json',
+    const res = await this.api.get('api/get_recommended.php', {
+      params: { size: 3 }
     })
     this.setState({ restaurants: res.data })
   }

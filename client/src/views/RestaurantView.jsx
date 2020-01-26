@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Row, Col, ProgressBar } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkerAlt, faPhone, faUtensils } from '@fortawesome/free-solid-svg-icons'
-import axios from 'axios'
+import { create } from '../utils/axios'
 import { RestaurantMap } from '../components'
 import styles from './RestaurantView.scss'
 
@@ -10,7 +10,7 @@ class RestaurantView extends React.Component {
   constructor(props) {
     super(props)
 
-    this.api = axios.create('/')
+    this.api = create()
 
     this.state = {
       restaurant: {}
@@ -20,87 +20,105 @@ class RestaurantView extends React.Component {
   async componentDidMount() {
     const { id } = this.props.match.params
 
-    const res = await this.api.get('/data/sample_restaurants.json')
-    const restaurants = res.data
+    const res = await this.api.get('/api/get_restaurant.php', {
+      params: { id }
+    })
 
 
-    const targets = restaurants.filter(item => item.id === id)
-    if (targets.length) {
-      this.setState({ restaurant: targets[0] })
-    }
+    const restaurant = res.data
+    this.setState({ restaurant })
   }
 
   render() {
-    const { name, place, tel, genre, scores, coordinates } = this.state.restaurant
+    const { name, address, tel, scores, latitude, longitude, sites } = this.state.restaurant
 
-    console.log(this.state.restaurant)
+    const genre = sites && Object.values(sites).map(site => site.genre).join('/').replace(/,|、/g, '/')
 
     return (
-      <Container className={styles.self}>
-        <h2>{name}</h2>
-        <Row>
-          <Col xs={{ span: 12, order: 1 }} lg={{ span: 4, order: 2 }}>
-            <h3>基本情報</h3>
-            <div className={styles.content}>
-              <div>
-                <FontAwesomeIcon className={styles.texticon} icon={faMapMarkerAlt} fixedWidth />
-                {place}
+      <div className={styles.self}>
+        <Container>
+          <h2>{name}</h2>
+          <Row>
+            <Col xs={{ span: 12, order: 1 }} lg={{ span: 4, order: 2 }}>
+              <h3>基本情報</h3>
+              <div className={styles.content}>
+                <div>
+                  <FontAwesomeIcon className={styles.texticon} icon={faMapMarkerAlt} fixedWidth />
+                  {address}
+                </div>
+                <div>
+                  <FontAwesomeIcon className={styles.texticon} icon={faPhone} fixedWidth />
+                  {tel}
+                </div>
+                <div>
+                  <FontAwesomeIcon className={styles.texticon} icon={faUtensils} fixedWidth />
+                  {genre}
+                </div>
               </div>
-              <div>
-                <FontAwesomeIcon className={styles.texticon} icon={faPhone} fixedWidth />
-                {tel}
-              </div>
-              <div>
-                <FontAwesomeIcon className={styles.texticon} icon={faUtensils} fixedWidth />
-                {genre}
-              </div>
-            </div>
 
-            <h3>地図</h3>
-            <div className={styles.content}>
-              <RestaurantMap center={coordinates} marker={name} />
-            </div>
-          </Col>
-          <Col xs={{ span: 12, order: 2 }} lg={{ span: 8, order: 1 }}>
-            <h3>評価</h3>
-            <div className={styles.content}>
-              {
-                scores && scores.map(item => (
-                  <div key={item.keyword}>
-                    <div className={styles.bar_text}>
-                      <span className='float-left'>
-                        {item.keyword}
-                      </span>
-                      <span className='float-right'>
-                        {item.score}
-                      </span>
+              <h3>地図</h3>
+              <div className={styles.content}>
+                <RestaurantMap center={latitude && [latitude, longitude]} marker={name} />
+              </div>
+            </Col>
+            <Col xs={{ span: 12, order: 2 }} lg={{ span: 8, order: 1 }}>
+              <h3>評価</h3>
+              <div className={styles.content}>
+                {
+                  scores && scores.map(item => (
+                    <div key={item.keyword}>
+                      <div className={styles.bar_text}>
+                        <span className='float-left'>
+                          {item.keyword}
+                        </span>
+                        <span className='float-right'>
+                          {item.score}
+                        </span>
+                      </div>
+                      <div>
+                        <ProgressBar now={item.score} />
+                      </div>
                     </div>
-                    <div>
-                      <ProgressBar now={item.score} />
-                    </div>
-                  </div>
-                ))
-              }
-            </div>
-            <h3>リンク</h3>
-            <div className={styles.content}>
-              <p className={styles.retty}>
-                Retty
-              </p>
-              <p className={styles.gurunavi}>
-                ぐるなび
-              </p>
-              <p className={styles.tabelog}>
-                食べログ
-              </p>
-            </div>
-          </Col>
-        </Row>
-
-
-
-
-      </Container>
+                  ))
+                }
+              </div>
+              <h3>リンク</h3>
+              <div className={styles.content}>
+                {
+                  sites && sites['Retty'] && (
+                    <p className={styles.retty}>
+                      Retty
+                      <a href={sites['Retty'].url}>
+                        アクセス
+                      </a>
+                    </p>
+                  )
+                }
+                {
+                  sites && sites['ぐるなび'] && (
+                    <p className={styles.gurunavi}>
+                      ぐるなび
+                      <a href={sites['ぐるなび'].url}>
+                        アクセス
+                      </a>
+                    </p>
+                  )
+                }
+                {
+                  sites && sites['食べログ'] && (
+                    <p className={styles.tabelog}>
+                      食べログ
+                      <a href={sites['食べログ'].url}>
+                        アクセス
+                      </a>
+                    </p>
+                  )
+                }
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </div>
     )
   }
 }

@@ -23,7 +23,7 @@ class RestaurantMap extends React.Component {
     return (
       <div style={{ height: '30vw' }}>
         <Map
-          center={[center.latitude, center.longitude]}
+          center={center}
           zoom={15}
           ref={this.mapRef}
           style={{ height: '30vw' }}
@@ -34,7 +34,7 @@ class RestaurantMap extends React.Component {
           />
           {
             marker && (
-              <Marker position={[center.latitude, center.longitude]}>
+              <Marker position={center}>
                 <Popup>{marker}</Popup>
               </Marker>
             )

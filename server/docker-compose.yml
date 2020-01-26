@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  php:
+    build:
+      context: ./docker_php
+    volumes:
+      - ./docker_php/php.ini:/usr/local/etc/php/php.ini
+      - ./src:/var/www/html
+    ports:
+      - 7070:80
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=crepemaker_db
+      - MYSQL_USER=crepemaker
+      - MYSQL_PASSWORD=crepemaker
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+      - PMA_USER=crepemaker
+      - PMA_PASSWORD=crepemaker
+    links:
+      - db
+    ports:
+      - 2020:80
+    volumes:
+      - ./phpmyadmin/sessions:/sessions
+volumes:
+  db:

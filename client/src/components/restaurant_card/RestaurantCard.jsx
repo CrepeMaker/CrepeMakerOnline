@@ -8,7 +8,9 @@ import styles from './RestaurantCard.scss'
 
 class RestaurantCard extends React.Component {
   render() {
-    const { id, name, place, tel, genre, scores, border, image } = this.props
+    const { id, name, address, tel, sites, scores, border, image } = this.props
+
+    const genre = sites && Object.values(sites).map(site => site.genre).join('/').replace(/,|、/g, '/')
 
     return (
       <Card border={border} className={c(styles.self, 'animated fadeIn')}>
@@ -30,7 +32,7 @@ class RestaurantCard extends React.Component {
               <Col lg={4} md={12} className={styles.content}>
                 <div>
                   <FontAwesomeIcon className={styles.texticon} icon={faMapMarkerAlt} fixedWidth />
-                  {place}
+                  {address}
                 </div>
                 <div>
                   <FontAwesomeIcon className={styles.texticon} icon={faPhone} fixedWidth />
