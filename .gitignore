@@ -3,8 +3,8 @@
 *.db
 
 # server
-public/api
-public/env.ini
+client/public/api
+client/public/env.ini
 server/src/env.ini
 
 phpmyadmin
