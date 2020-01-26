@@ -58,7 +58,7 @@ class RestaurantView extends React.Component {
 
               <h3>地図</h3>
               <div className={styles.content}>
-                <RestaurantMap center={latitude && [latitude, longitude]} marker={name} />
+                <RestaurantMap center={latitude && [latitude, longitude]} marker={name} height='30vw' />
               </div>
             </Col>
             <Col xs={{ span: 12, order: 2 }} lg={{ span: 8, order: 1 }}>

@@ -16,17 +16,18 @@ class RestaurantMap extends React.Component {
   }
 
   render() {
-    const { center, marker } = this.props
+    const { center, marker, height, option = {} } = this.props
 
     if (!center) return null
 
     return (
-      <div style={{ height: '30vw' }}>
+      <div>
         <Map
           center={center}
           zoom={15}
           ref={this.mapRef}
-          style={{ height: '30vw' }}
+          style={{ height }}
+          {...option}
         >
           <TileLayer
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

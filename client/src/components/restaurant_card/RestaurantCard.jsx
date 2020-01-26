@@ -4,11 +4,12 @@ import { Card, Container, Row, Col, ProgressBar, Image } from 'react-bootstrap'
 import c from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkerAlt, faPhone, faUtensils } from '@fortawesome/free-solid-svg-icons'
+import RestaurantMap from '../common/RestaurantMap'
 import styles from './RestaurantCard.scss'
 
 class RestaurantCard extends React.Component {
   render() {
-    const { id, name, address, tel, sites, scores, border, image } = this.props
+    const { id, name, address, tel, sites, scores, border, latitude, longitude } = this.props
 
     const genre = sites && Object.values(sites).map(site => site.genre).join('/').replace(/,|、/g, '/')
 
@@ -22,13 +23,6 @@ class RestaurantCard extends React.Component {
           </Card.Title>
           <Container>
             <Row>
-              <Col lg={3} md={12}>
-                <Image
-                  className={styles.image}
-                  src={image}
-                  fluid
-                />
-              </Col>
               <Col lg={4} md={12} className={styles.content}>
                 <div>
                   <FontAwesomeIcon className={styles.texticon} icon={faMapMarkerAlt} fixedWidth />
@@ -66,6 +60,14 @@ class RestaurantCard extends React.Component {
                     </Container>
                   ))
                 }
+              </Col>
+              <Col lg={3} md={12}>
+                <RestaurantMap
+                  center={latitude && [latitude, longitude]}
+                  marker={name}
+                  height='150px'
+                  option={{ zoomControl: false }}
+                />
               </Col>
             </Row>
           </Container>
