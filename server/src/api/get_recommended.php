@@ -15,7 +15,10 @@ try{
   $category_size = array_key_exists('category_size', $_GET) ? $_GET['category_size'] : 100;
 
   $stmt_shop = $db->prepare(
-    'SELECT id, name, address, tel, latitude, longitude FROM shops ORDER BY RAND() LIMIT ?'
+    'SELECT id, name, address, tel, latitude, longitude '
+    .'FROM shops, (SELECT shop_id, MAX(score) as max_score FROM shopscores GROUP BY shop_id) AS A '
+    .'WHERE id = A.shop_id '
+    .'ORDER BY max_score DESC, RAND() LIMIT ?'
   );
 
   $stmt_shop->bind_param('d', $size);
