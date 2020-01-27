@@ -1,0 +1,172 @@
+[
+  {
+    "id": 0,
+    "name": "接客",
+    "show": true
+  },
+  {
+    "id": 1,
+    "name": "店の雰囲気",
+    "show": true
+  },
+  {
+    "id": 2,
+    "name": "コスパ",
+    "show": true
+  },
+  {
+    "id": 3,
+    "name": "xx",
+    "show": false
+  },
+  {
+    "id": 4,
+    "name": "素材",
+    "show": true
+  },
+  {
+    "id": 5,
+    "name": "洋食",
+    "show": true
+  },
+  {
+    "id": 6,
+    "name": "野菜",
+    "show": true
+  },
+  {
+    "id": 7,
+    "name": "お酒",
+    "show": true
+  },
+  {
+    "id": 8,
+    "name": "パン",
+    "show": true
+  },
+  {
+    "id": 9,
+    "name": "洋菓子",
+    "show": true
+  },
+  {
+    "id": 10,
+    "name": "味",
+    "show": true
+  },
+  {
+    "id": 11,
+    "name": "海外料理",
+    "show": true
+  },
+  {
+    "id": 12,
+    "name": "ラーメン",
+    "show": true
+  },
+  {
+    "id": 13,
+    "name": "立地",
+    "show": true
+  },
+  {
+    "id": 14,
+    "name": "印象",
+    "show": true
+  },
+  {
+    "id": 15,
+    "name": "見た目",
+    "show": true
+  },
+  {
+    "id": 16,
+    "name": "パスタ",
+    "show": true
+  },
+  {
+    "id": 17,
+    "name": "揚げ物",
+    "show": true
+  },
+  {
+    "id": 18,
+    "name": "カレー",
+    "show": true
+  },
+  {
+    "id": 19,
+    "name": "パンケーキ",
+    "show": true
+  },
+  {
+    "id": 20,
+    "name": "焼き鳥",
+    "show": true
+  },
+  {
+    "id": 21,
+    "name": "和食",
+    "show": true
+  },
+  {
+    "id": 22,
+    "name": "xx",
+    "show": false
+  },
+  {
+    "id": 23,
+    "name": "焼き肉",
+    "show": true
+  },
+  {
+    "id": 24,
+    "name": "カフェ",
+    "show": true
+  },
+  {
+    "id": 25,
+    "name": "ピザ",
+    "show": true
+  },
+  {
+    "id": 26,
+    "name": "xx",
+    "show": false
+  },
+  {
+    "id": 27,
+    "name": "客",
+    "show": false
+  },
+  {
+    "id": 28,
+    "name": "食感",
+    "show": false
+  },
+  {
+    "id": 29,
+    "name": "定食",
+    "show": false
+  },
+  {
+    "id": 30,
+    "name": "客",
+    "show": false
+  },
+  {
+    "id": 31,
+    "name": "蕎麦",
+    "show": false
+  },
+  {
+    "id": 32,
+    "name": "中華料理",
+    "show": false
+  },
+  {
+    "id": 33,
+    "name": "肉料理",
+    "show": false
+  }
+]

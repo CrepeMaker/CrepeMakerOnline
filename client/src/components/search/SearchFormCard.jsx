@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Row, Col, Button, Card } from 'react-bootstrap'
+import axios from 'axios'
 import { create } from '../../utils/axios'
 import KeywordButtons from './KeywordButtons'
 import GenreSelector from './GenreSelector'
@@ -10,7 +11,7 @@ class SearchFormCard extends React.Component {
   constructor(props) {
     super(props)
 
-    const keywords = ['価格', '雰囲気', '料理(質)', '料理(量)', '立地']
+    const keywords = []
     const places = ['目黒区']
     const genres = ['全て']
 
@@ -30,6 +31,12 @@ class SearchFormCard extends React.Component {
   async componentDidMount() {
     const { initial_keywords, initial_genre, initial_place } = this.props
     const { genres, places } = this.state
+
+    const res = await axios.get('/data/categories.json')
+    if (res.status === 200) {
+      this.setState({ keywords: res.data })
+      console.log({ keywords: res.data })
+    }
 
     this.setState({
       selected_keywords: initial_keywords || [],

@@ -8,6 +8,8 @@ class KeywordButtons extends React.Component {
     const { selected, onUpdate } = this.props
     let new_selected = []
 
+    console.log(selected, keyword)
+
     if (selected.includes(keyword)) {
       new_selected = selected.filter(item => item != keyword)
     } else {
@@ -25,15 +27,15 @@ class KeywordButtons extends React.Component {
     return (
       <ButtonToolbar>
         {
-          keywords && keywords.map(keyword => (
+          keywords && keywords.filter(keyword => keyword.show).map(keyword => (
             <Button
               className={c('mx-auto', styles.button)}
-              key={keyword}
+              key={keyword.id}
               variant="outline-primary"
-              onClick={() => this.onClick(keyword)}
-              active={selected && selected.includes(keyword)}
+              onClick={() => this.onClick(String(keyword.id))}
+              active={selected && selected.includes(String(keyword.id))}
             >
-              {keyword}
+              {keyword.name}
             </Button>
           ))
         }

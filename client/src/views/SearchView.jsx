@@ -12,6 +12,8 @@ class SearchView extends React.Component {
   constructor(props) {
     super(props)
 
+    this.api = create()
+
     const { keywords, genre, place } = parseParams(location.search)
 
     this.state = {
@@ -23,7 +25,8 @@ class SearchView extends React.Component {
   }
 
   async componentDidMount() {
-    this.update()
+    const params = parseParams(location.search)
+    this.update(params)
 
     /*
     const res = await this.api.get('api/get_recommended.php', {
@@ -33,9 +36,15 @@ class SearchView extends React.Component {
     */
   }
 
-  update() {
-    const { location } = this.props
+  async update({ keywords, place, genre }) {
+    const res = await this.api.get('/api/search_restaurants.php', {
+      params: {
+        categories: keywords,
+        size: 5,
+      }
+    })
 
+    console.log(res)
   }
 
   onSubmit({ keywords, genre, place }) {
@@ -43,6 +52,7 @@ class SearchView extends React.Component {
     const search = createParams({ keywords, place, genre })
 
     history.push(`/search?${search}`)
+    this.update({ keywords, place, genre })
   }
 
   render() {
