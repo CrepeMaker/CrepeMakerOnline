@@ -18,6 +18,7 @@ try{
   }
 
   $shop_id = (int)$_GET['id'];
+  $category_size = array_key_exists('category_size', $_GET) ? $_GET['category_size'] : 100;
 
   $stmt_shop = $db->prepare(
     'SELECT name, address, tel, latitude, longitude FROM shops WHERE id = ?'
@@ -35,7 +36,7 @@ try{
 
   $data = array(
     'name' => $name, 'address' => $address, 'tel' => $tel, 'latitude' => $latitude, 'longitude' => $longitude,
-    'sites' => array(),
+    'sites' => array(), 'scores' => array(),
   );
 
   $stmt_shop->close();
@@ -56,6 +57,24 @@ try{
     $data['sites'][$site_name] = array('genre' => $genre, 'url' => $url);
   }
   $stmt_site->close();
+
+  $stmt_scores = $db->prepare(
+    'SELECT category, score FROM shopscores WHERE shop_id = ? ORDER BY score DESC LIMIT ?'
+  );
+  $stmt_scores->bind_param('dd', $shop_id, $category_size);
+  $success = $stmt_scores->execute();
+
+  if (!$success) {
+    throw new Exception('Error in SQL queries.');
+  }
+
+  $stmt_scores->bind_result($category, $score);
+
+  while ($stmt_scores->fetch()) {
+    array_push($data['scores'], array('category' => $category, 'score' => $score));
+  }
+
+  $stmt_scores->close();
 
   http_response_code(200);
   echo json_encode($data);

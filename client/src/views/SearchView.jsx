@@ -1,8 +1,8 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import { Container, Row, Col, Button, Card } from 'react-bootstrap'
+import { Container, Row, Col, Spinner } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUtensils, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { SearchFormCard, RestaurantCard } from '../components'
 import { create } from '../utils/axios'
 import { parseParams, createParams } from '../utils/params'
@@ -17,6 +17,7 @@ class SearchView extends React.Component {
     const { keywords, genre, place } = parseParams(location.search)
 
     this.state = {
+      busy: false,
       restaurants: [],
       initial_keywords: keywords,
       initial_genre: genre,
@@ -37,14 +38,16 @@ class SearchView extends React.Component {
   }
 
   async update({ keywords, place, genre }) {
+    this.setState({ restaurants: [], busy: true })
     const res = await this.api.get('/api/search_restaurants.php', {
       params: {
         categories: keywords,
-        size: 5,
+        size: 3,
+        category_size: 5,
       }
     })
 
-    console.log(res)
+    this.setState({ restaurants: res.data, busy: false })
   }
 
   onSubmit({ keywords, genre, place }) {
@@ -56,7 +59,7 @@ class SearchView extends React.Component {
   }
 
   render() {
-    const { restaurants, initial_keywords, initial_genre, initial_place } = this.state
+    const { restaurants, initial_keywords, initial_genre, initial_place, busy } = this.state
 
     return (
       <div className={styles.self}>
@@ -91,6 +94,15 @@ class SearchView extends React.Component {
             </h3>
             <Row>
               <Col xs={12}>
+                {
+                  busy && (
+                    <div className='text-center'>
+                      <Spinner animation="border" />
+                      <br />
+                      検索中
+                    </div>
+                  )
+                }
                 {
                   restaurants && restaurants.map(item => (
                     <RestaurantCard

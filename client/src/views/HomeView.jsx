@@ -18,7 +18,7 @@ class HomeView extends React.Component {
 
   async componentDidMount() {
     const res = await this.api.get('api/get_recommended.php', {
-      params: { size: 3 }
+      params: { size: 3, category_size: 5, }
     })
     this.setState({ restaurants: res.data })
   }

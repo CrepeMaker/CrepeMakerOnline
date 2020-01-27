@@ -5,7 +5,9 @@ const parseParams = (search = '') => {
 
   const { keywords = [] } = params
 
-  return { keywords }
+  return {
+    keywords: typeof (keywords) === 'string' ? [keywords,] : keywords
+  }
 }
 
 const createParams = ({ keywords } = {}) => {

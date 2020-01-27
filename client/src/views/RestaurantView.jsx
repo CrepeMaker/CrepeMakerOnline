@@ -69,7 +69,7 @@ class RestaurantView extends React.Component {
                     <div key={item.keyword}>
                       <div className={styles.bar_text}>
                         <span className='float-left'>
-                          {item.keyword}
+                          {item.category}
                         </span>
                         <span className='float-right'>
                           {item.score}

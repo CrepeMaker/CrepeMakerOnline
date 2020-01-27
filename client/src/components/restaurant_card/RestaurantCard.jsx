@@ -5,6 +5,7 @@ import c from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkerAlt, faPhone, faUtensils } from '@fortawesome/free-solid-svg-icons'
 import RestaurantMap from '../common/RestaurantMap'
+import axios from 'axios'
 import styles from './RestaurantCard.scss'
 
 class RestaurantCard extends React.Component {
@@ -43,7 +44,7 @@ class RestaurantCard extends React.Component {
                     <Container key={item.keyword}>
                       <Row>
                         <Col xs={3}>
-                          {item.keyword}
+                          {item.category}
                         </Col>
                         <Col xs={6}>
                           <ProgressBar

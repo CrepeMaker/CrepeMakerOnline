@@ -8,8 +8,6 @@ class KeywordButtons extends React.Component {
     const { selected, onUpdate } = this.props
     let new_selected = []
 
-    console.log(selected, keyword)
-
     if (selected.includes(keyword)) {
       new_selected = selected.filter(item => item != keyword)
     } else {
