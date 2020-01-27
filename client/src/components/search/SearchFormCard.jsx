@@ -35,7 +35,6 @@ class SearchFormCard extends React.Component {
     const res = await axios.get('/data/categories.json')
     if (res.status === 200) {
       this.setState({ keywords: res.data })
-      console.log({ keywords: res.data })
     }
 
     this.setState({

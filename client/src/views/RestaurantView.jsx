@@ -3,6 +3,7 @@ import { Container, Row, Col, ProgressBar } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkerAlt, faPhone, faUtensils } from '@fortawesome/free-solid-svg-icons'
 import { create } from '../utils/axios'
+import { getCategoriesDict } from '../utils/categories'
 import { RestaurantMap } from '../components'
 import styles from './RestaurantView.scss'
 
@@ -13,7 +14,8 @@ class RestaurantView extends React.Component {
     this.api = create()
 
     this.state = {
-      restaurant: {}
+      restaurant: {},
+      categories_dict: null,
     }
   }
 
@@ -24,13 +26,15 @@ class RestaurantView extends React.Component {
       params: { id }
     })
 
+    const categories_dict = await getCategoriesDict()
 
     const restaurant = res.data
-    this.setState({ restaurant })
+    this.setState({ restaurant, categories_dict })
   }
 
   render() {
     const { name, address, tel, scores, latitude, longitude, sites } = this.state.restaurant
+    const { categories_dict } = this.state
 
     const genre = sites && Object.values(sites).map(site => site.genre).join('/').replace(/,|、/g, '/')
 
@@ -66,10 +70,10 @@ class RestaurantView extends React.Component {
               <div className={styles.content}>
                 {
                   scores && scores.map(item => (
-                    <div key={item.keyword}>
+                    <div key={item.category}>
                       <div className={styles.bar_text}>
                         <span className='float-left'>
-                          {item.category}
+                          {categories_dict ? categories_dict[item.category].name : item.category}
                         </span>
                         <span className='float-right'>
                           {item.score}

@@ -5,12 +5,23 @@ import c from 'classnames'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapMarkerAlt, faPhone, faUtensils } from '@fortawesome/free-solid-svg-icons'
 import RestaurantMap from '../common/RestaurantMap'
-import axios from 'axios'
+import { getCategoriesDict } from '../../utils/categories'
 import styles from './RestaurantCard.scss'
 
 class RestaurantCard extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { categories_dict: null }
+  }
+
+  async componentDidMount() {
+    const categories_dict = await getCategoriesDict()
+    this.setState({ categories_dict })
+  }
+
   render() {
     const { id, name, address, tel, sites, scores, border, latitude, longitude } = this.props
+    const { categories_dict } = this.state
 
     const genre = sites && Object.values(sites).map(site => site.genre).join('/').replace(/,|、/g, '/')
 
@@ -41,10 +52,10 @@ class RestaurantCard extends React.Component {
               <Col lg={5} md={12} className={styles.content}>
                 {
                   scores && scores.map(item => (
-                    <Container key={item.keyword}>
+                    <Container key={item.category}>
                       <Row>
                         <Col xs={3}>
-                          {item.category}
+                          {categories_dict ? categories_dict[item.category].name : item.category}
                         </Col>
                         <Col xs={6}>
                           <ProgressBar
