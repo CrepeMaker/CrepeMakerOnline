@@ -105,6 +105,7 @@ class SearchFormCard extends React.Component {
               className={styles.search_button}
               variant='info'
               onClick={this.onSubmit.bind(this)}
+              disabled={!selected_keywords || !selected_keywords.length}
             >
               検索
             </Button>

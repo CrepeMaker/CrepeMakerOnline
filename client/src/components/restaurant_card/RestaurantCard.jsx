@@ -62,7 +62,7 @@ class RestaurantCard extends React.Component {
                             animated
                             striped
                             variant="info"
-                            now={item.score}
+                            now={item.score * 4 + 50}
                           />
                         </Col>
                         <Col xs={3}>

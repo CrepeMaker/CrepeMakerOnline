@@ -80,7 +80,7 @@ class RestaurantView extends React.Component {
                         </span>
                       </div>
                       <div>
-                        <ProgressBar now={item.score} />
+                        <ProgressBar now={item.score * 4 + 50} />
                       </div>
                     </div>
                   ))
