@@ -12,7 +12,6 @@ class TopBar extends React.Component {
           <img className={styles.logo} src='/images/sweets_crape.png' />
           CrepeMakerOnline
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
       </Navbar>
     )
   }
