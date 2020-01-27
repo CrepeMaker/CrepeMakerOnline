@@ -10,7 +10,6 @@ class RestaurantMap extends React.Component {
   componentDidMount() {
     setTimeout(() => {
       const map = this.mapRef.current
-      console.log(map.leafletElement.invalidateSize)
       if (map) map.leafletElement.invalidateSize()
     }, 100)
   }

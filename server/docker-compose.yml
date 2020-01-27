@@ -18,6 +18,8 @@ services:
       - MYSQL_DATABASE=crepemaker_db
       - MYSQL_USER=crepemaker
       - MYSQL_PASSWORD=crepemaker
+    ports:
+      - 3366:3306
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:

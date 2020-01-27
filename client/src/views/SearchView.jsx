@@ -1,29 +1,44 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Button, Card } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUtensils } from '@fortawesome/free-solid-svg-icons'
+import { faUtensils, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { SearchFormCard, RestaurantCard } from '../components'
 import { create } from '../utils/axios'
-import { createParams } from '../utils/params'
+import { parseParams, createParams } from '../utils/params'
 import styles from './HomeView.scss'
 
-class HomeView extends React.Component {
+class SearchView extends React.Component {
   constructor(props) {
     super(props)
 
-    this.api = create()
-    this.state = { restaurants: [] }
+    const { keywords, genre, place } = parseParams(location.search)
+
+    this.state = {
+      restaurants: [],
+      initial_keywords: keywords,
+      initial_genre: genre,
+      initial_place: place,
+    }
   }
 
   async componentDidMount() {
+    this.update()
+
+    /*
     const res = await this.api.get('api/get_recommended.php', {
       params: { size: 3 }
     })
     this.setState({ restaurants: res.data })
+    */
   }
 
-  onSubmit({ keywords, place, genre }) {
+  update() {
+    const { location } = this.props
+
+  }
+
+  onSubmit({ keywords, genre, place }) {
     const { history } = this.props
     const search = createParams({ keywords, place, genre })
 
@@ -31,7 +46,7 @@ class HomeView extends React.Component {
   }
 
   render() {
-    const { restaurants } = this.state
+    const { restaurants, initial_keywords, initial_genre, initial_place } = this.state
 
     return (
       <div className={styles.self}>
@@ -50,7 +65,10 @@ class HomeView extends React.Component {
             </h3>
             <Row>
               <Col lg={{ span: 8, offset: 2 }} md={{ span: 10, offset: 1 }} sm={12}>
-                <SearchFormCard onSubmit={this.onSubmit.bind(this)} />
+                <SearchFormCard
+                  onSubmit={this.onSubmit.bind(this)}
+                  {...{ initial_keywords, initial_genre, initial_place }}
+                />
               </Col>
             </Row>
           </Container>
@@ -58,9 +76,8 @@ class HomeView extends React.Component {
         <div className={styles.recommendations}>
           <Container>
             <h3>
-              <FontAwesomeIcon className={styles.texticon} icon={faUtensils} fixedWidth />
-              おすすめレストラン
-              <FontAwesomeIcon className={styles.texticon} icon={faUtensils} fixedWidth />
+              <FontAwesomeIcon className={styles.texticon} icon={faSearch} fixedWidth />
+              検索結果
             </h3>
             <Row>
               <Col xs={12}>
@@ -73,7 +90,6 @@ class HomeView extends React.Component {
                     />
                   ))
                 }
-
               </Col>
             </Row>
           </Container>
@@ -83,4 +99,4 @@ class HomeView extends React.Component {
   }
 }
 
-export default withRouter(HomeView)
+export default withRouter(SearchView)
