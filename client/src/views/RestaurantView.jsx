@@ -69,7 +69,7 @@ class RestaurantView extends React.Component {
               <h3>評価</h3>
               <div className={styles.content}>
                 {
-                  scores && scores.map(item => (
+                  scores && scores.filter(item => !categories_dict || categories_dict[item.category].show).map(item => (
                     <div key={item.category}>
                       <div className={styles.bar_text}>
                         <span className='float-left'>

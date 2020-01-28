@@ -51,7 +51,7 @@ class RestaurantCard extends React.Component {
               </Col>
               <Col lg={5} md={12} className={styles.content}>
                 {
-                  scores && scores.map(item => (
+                  scores && scores.filter(item => !categories_dict || categories_dict[item.category].show).map(item => (
                     <Container key={item.category}>
                       <Row>
                         <Col xs={3}>
